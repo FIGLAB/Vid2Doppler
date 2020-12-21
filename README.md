@@ -23,7 +23,6 @@ In "SynthDop" Folder,
 4. Run the following commands to get the pretrained pose model:
 	
 	cd Python
-
 	source ../Environment/prepare_data.sh
 
 
@@ -32,9 +31,7 @@ In "SynthDop" Folder,
 	python doppler_from_vid.py --input_video YOUR_INPUT_VIDEO_FILE
 
 	Other options:
-
 		--visualize_mesh : output visualized mesh
-
 		--wireframe : output wireframe video results (otherwise, output mesh video results)
 
 
