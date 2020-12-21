@@ -1,6 +1,6 @@
 # Synthesizing Doppler Radar Data from Videos for Training Privacy-Preserving Activity Recognition (CHI2021)
 
-## Command to run the code: (skip Step 2, 3 except the first time setting up the virtual environment)
+## Environment Setup: 
 
 In "SynthDop" Folder,
 
