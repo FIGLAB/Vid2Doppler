@@ -34,12 +34,12 @@ def main(args):
     fourcc = cv2.VideoWriter_fourcc('D', 'I', 'V', 'X')
     if args.wireframe:
         out = cv2.VideoWriter(args.output_folder + video_file + "/" + video_file \
-                            + "_result_bottom.mp4", fourcc, fps, \
+                            + "_result_wireframe.mp4", fourcc, fps, \
                             (int(video.get(cv2.CAP_PROP_FRAME_WIDTH)), \
                             int(video.get(cv2.CAP_PROP_FRAME_HEIGHT)))) 
     else:
         out = cv2.VideoWriter(args.output_folder + video_file + "/" + video_file \
-                            + "_result_velocity.mp4", fourcc, fps, \
+                            + "_result_mesh.mp4", fourcc, fps, \
                             (int(video.get(cv2.CAP_PROP_FRAME_WIDTH)), \
                             int(video.get(cv2.CAP_PROP_FRAME_HEIGHT)))) 
 
@@ -101,13 +101,13 @@ def main(args):
         hand_vertex_position = np.array(hand_vertex_position)
         hand_vertex_velocity = np.array(hand_vertex_velocity)
 
+    # loop over frames
     count = 0
-    frames = frames[:50]
     for frame_idx in frames:
 
         # capture frames in the video 
         ret, frame = video.read() 
-        print(count)
+        print("Visualizing Frame #" + str(count))
         count +=1
 
         # define renderer
@@ -138,10 +138,7 @@ def main(args):
         # get camera direction
         camera_dir = camera_orig / np.linalg.norm(camera_orig)
 
-        velocity_colors = np.ones((num_vertices, 3))
-        velocity_colors[:,0] *= 0.5
-        velocity_colors[:,1] *= 0.6
-
+        # smooth the video result
         count_frame = 1 
         position = vertex_position[frame_idx]
         for i in range(7):
@@ -156,20 +153,26 @@ def main(args):
         # render images
         visibility_image, velocity_image, example_image = renderer.render(
             frame, position,
-            # vertex_position[frame_idx],
             cam_transformation=orig_cameras[frame_idx],
             cam_dir = camera_dir,
             velocity_colors=velocity_colors,
             mesh_filename=None,
-            angle=45,
-            axis=[ -0.3826834, 0, 0, 0.9238795 ]
+            # angle=45,
+            # axis=[ -0.3826834, 0, 0, 0.9238795 ]
         ) 
 
-        frame = velocity_image#velocity_image * (velocity_image > 0) + frame * (velocity_image == 0)
+        # output with or without background
+        if args.background:
+            frame = velocity_image * (velocity_image > 0) + frame * (velocity_image == 0)
+        else:
+            frame = velocity_image
 
-        # frame = np.concatenate([frame, visibility_image, \
-        #                         velocity_image, example_image], axis=1) 
+        # output results with both velocity and visibility
+        if args.concatenate_result:
+            frame = np.concatenate([frame, visibility_image, \
+                                    velocity_image, example_image], axis=1) 
 
+        # show result with more information
         if args.show_text and save_hand_csv:
 
             # get the string for position result
@@ -222,6 +225,12 @@ if __name__ == '__main__':
 
     parser.add_argument('--wireframe', action='store_true',
                         help='render all meshes as wireframes.')
+
+    parser.add_argument('--concatenate_result', action='store_true',
+                        help='output concatenate result of velocity and visibility.')
+
+    parser.add_argument('--background', action='store_true',
+                        help='output result with original background.')
 
     parser.add_argument('--camera_orig', type=str, default="[0,0,-10]",
                         help='camera origin position')

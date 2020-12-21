@@ -24,7 +24,7 @@ def main(args):
 	os.system("python run_VIBE.py --input_video %s --output_folder %s" % (args.input_video, folder_path))
 
 	for camera_orig in camera_origins:
-		print(camera_orig)
+		print("Camera Orig:", camera_orig)
 
 		camera_orig_str = [str(i) for i in camera_orig[1:-1].split(',')] 
 		out_path = folder_path + "/output_" + camera_orig_str[0] + '_' + camera_orig_str[1] + '_' + camera_orig_str[2] +'/'
@@ -38,7 +38,6 @@ def main(args):
 			else:
 				os.system("python compute_visualization.py --input_video %s --output_folder %s --camera_orig %s" % (args.input_video, out_path, camera_orig))
 		os.system("python compute_synth_doppler.py --input_video %s --output_folder %s" % (args.input_video, out_path))
-
 		if args.plot_spectogram:
 			if args.visualize_mesh == False: # Mesh rendering is a pre-requisite of this
 					os.system("python compute_visualization.py --input_video %s --output_folder %s --camera_orig %s" % (args.input_video, out_path, camera_orig))

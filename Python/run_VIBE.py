@@ -177,8 +177,6 @@ def main(args):
     del model
 
     frame_results = prepare_rendering_results(vibe_results, len(frames))
-    print(len(frames))
-    exit()
     np.save(output_path + "/frame_results", frame_results)
     np.save(output_path + "/image_folder", image_folder)
     np.save(output_path + "/orig_width", orig_width)
