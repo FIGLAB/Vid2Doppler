@@ -20,12 +20,14 @@ In "SynthDop" Folder,
 
 	If used Environment/install_pip.sh to create the virtual environment, in ./dope/lib/python3.7/site-packages/psbody/mesh/meshviewer.py, change the line "from OpenGL import GL, GLU, GLUT" to "from OpenGL import GL, GLU".
 
-
-## Usages:
-
+4. Run the following commands to get the pretrained pose model:
+	
 	cd Python
 
 	source ../Environment/prepare_data.sh
+
+
+## Usages:
 
 	python doppler_from_vid.py --input_video YOUR_INPUT_VIDEO_FILE
 
