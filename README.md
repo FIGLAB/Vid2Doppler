@@ -1,4 +1,6 @@
-# Synthesizing Doppler Radar Data from Videos for Training Privacy-Preserving Activity Recognition (CHI2021)
+# Vid2Doppler: Synthesizing Doppler Radar Data from Videos forTraining Privacy-Preserving Activity Recognition
+
+The full models and data will be available upon paper publication.
 
 ## Environment Setup: 
 
