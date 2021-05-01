@@ -8,7 +8,7 @@ import math
 import cv2
 import os
 os.environ['PYOPENGL_PLATFORM'] = 'egl'
-import numpy as np 
+import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 from velocity_renderer import VelocityRenderer
@@ -18,16 +18,13 @@ import colorsys
 def main(args):
 
     # define camera origin position
-    camera_orig = [float(i) for i in args.camera_orig[1:-1].split(',')] 
+    camera_orig = [float(i) for i in args.camera_orig[1:-1].split(',')]
 
     # get video file name
     video_file = args.input_video.split("/")[-1].split(".")[0]
 
-    # save hand info
-    save_hand_csv = args.save_hand_csv
-
     # get fps of the video
-    video = cv2.VideoCapture(args.input_video)    
+    video = cv2.VideoCapture(args.input_video)
     fps = video.get(cv2.CAP_PROP_FPS)
 
     # define video writer
@@ -36,17 +33,17 @@ def main(args):
         out = cv2.VideoWriter(args.output_folder + video_file + "/" + video_file \
                             + "_result_wireframe.mp4", fourcc, fps, \
                             (int(video.get(cv2.CAP_PROP_FRAME_WIDTH)), \
-                            int(video.get(cv2.CAP_PROP_FRAME_HEIGHT)))) 
+                            int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))))
     else:
         out = cv2.VideoWriter(args.output_folder + video_file + "/" + video_file \
                             + "_result_mesh.mp4", fourcc, fps, \
                             (int(video.get(cv2.CAP_PROP_FRAME_WIDTH)), \
-                            int(video.get(cv2.CAP_PROP_FRAME_HEIGHT)))) 
+                            int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))))
 
     # get the number of frames
     num_frames = len([name for name in \
             os.listdir(args.output_folder + video_file + "/frame_position") \
-            if "frame_" in name]) 
+            if "frame_" in name])
     output_path = os.path.join(args.output_folder, os.path.basename(\
                                 video_file).replace('.mp4', ''))
     if os.path.isfile(output_path + \
@@ -61,9 +58,7 @@ def main(args):
     # read frame info as numpy arrays from csv files
     vertex_position = []
     vertex_velocity = []
-    if save_hand_csv:
-        hand_vertex_position = []
-        hand_vertex_velocity = []
+
     for frame_idx in frames:
 
         # read frame info for human body
@@ -74,21 +69,9 @@ def main(args):
             + "/frame_velocity/frame_%06d.csv" % frame_idx, delimiter=',')
         vertex_velocity.append(frame_info[:, 0])
 
-        # read frame info for human hand
-        if save_hand_csv:
-            hand_frame_info = np.genfromtxt(args.output_folder + video_file \
-                + "/hand_frame_position/frame_%06d.csv" \
-                                    % frame_idx, delimiter=',')
-            hand_vertex_position.append(hand_frame_info[:, :3])
-            hand_frame_info = np.genfromtxt(args.output_folder + video_file \
-                + "/hand_frame_velocity/frame_%06d.csv" \
-                                    % frame_idx, delimiter=',')
-            hand_vertex_velocity.append(hand_frame_info[:, 0])
 
     # get the number of vertices
     num_vertices = vertex_position[0].shape[0]
-    if save_hand_csv:
-        num_hand_vertices = hand_vertex_position[0].shape[0]
 
     # get predicted camera positions from the model
     orig_cameras = np.genfromtxt(args.output_folder + video_file \
@@ -97,16 +80,14 @@ def main(args):
     # change position and velocity lists to numpy arrays
     vertex_position = np.array(vertex_position)
     vertex_velocity = np.array(vertex_velocity)
-    if save_hand_csv:
-        hand_vertex_position = np.array(hand_vertex_position)
-        hand_vertex_velocity = np.array(hand_vertex_velocity)
+
 
     # loop over frames
     count = 0
     for frame_idx in frames:
 
-        # capture frames in the video 
-        ret, frame = video.read() 
+        # capture frames in the video
+        ret, frame = video.read()
         print("Visualizing Frame #" + str(count))
         count +=1
 
@@ -121,17 +102,17 @@ def main(args):
         if frame_idx not in frames:
             continue
 
-        # compute velocity colors 
+        # compute velocity colors
         velocity_colors = np.zeros((num_vertices, 3))
         max_velocity = 2
-        min_velocity = -2 
- 
+        min_velocity = -2
+
         # define coolwarm mapping
         cmap = plt.get_cmap("RdYlBu")
         norm = matplotlib.colors.Normalize(vmin=-0.5, vmax=0.5)
         coolwarm_mapping = matplotlib.cm.ScalarMappable(cmap=cmap, norm=norm)
 
-        # get velocity colors 
+        # get velocity colors
         velocity_colors = coolwarm_mapping.to_rgba(\
                                         vertex_velocity[frame_idx])[:, :-1]
 
@@ -139,7 +120,7 @@ def main(args):
         camera_dir = camera_orig / np.linalg.norm(camera_orig)
 
         # smooth the video result
-        count_frame = 1 
+        count_frame = 1
         position = vertex_position[frame_idx]
         for i in range(7):
             if frame_idx > i:
@@ -159,7 +140,7 @@ def main(args):
             mesh_filename=None,
             # angle=45,
             # axis=[ -0.3826834, 0, 0, 0.9238795 ]
-        ) 
+        )
 
         # output with or without background
         if args.background:
@@ -170,50 +151,15 @@ def main(args):
         # output results with both velocity and visibility
         if args.concatenate_result:
             frame = np.concatenate([frame, visibility_image, \
-                                    velocity_image, example_image], axis=1) 
+                                    velocity_image, example_image], axis=1)
 
-        # show result with more information
-        if args.show_text and save_hand_csv:
-
-            # get the string for position result
-            position_result_str = "position: " + str(round(sum(\
-                        hand_vertex_position[frame_idx][:,0]) / \
-                                num_hand_vertices, 2)) + ", " \
-                        + str(round(sum(hand_vertex_position[frame_idx][:,1]) \
-                         / num_hand_vertices, 2)) + ", " \
-                        + str(round(sum(hand_vertex_position[frame_idx][:,2]) \
-                            / num_hand_vertices, 2))
-
-            # get the string for radial velocity result, they don't have the first frame 
-            radial_result_str = "radial: " + str(round(sum(\
-                hand_vertex_velocity[frame_idx]) / num_hand_vertices, 2))
-      
-            # describe the type of font to be used
-            font = cv2.FONT_HERSHEY_SIMPLEX 
-          
-            # Use putText() method for inserting text on video 
-            cv2.putText(frame,  
-                        position_result_str,  
-                        (int(video.get(cv2.CAP_PROP_FRAME_WIDTH)) * 2, 50),  
-                        font, 1,  
-                        (0, 255, 255),  
-                        2,  
-                        cv2.LINE_4) 
-            cv2.putText(frame,  
-                        radial_result_str,  
-                        (int(video.get(cv2.CAP_PROP_FRAME_WIDTH)) * 2, 100),  
-                        font, 1,  
-                        (0, 255, 255),  
-                        2,  
-                        cv2.LINE_4) 
-
-        # Display the resulting frame 
+        # Display the resulting frame
         out.write(frame)
-      
-    # release the cap object 
-    out.release() 
 
- 
+    # release the cap object
+    out.release()
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
@@ -234,12 +180,6 @@ if __name__ == '__main__':
 
     parser.add_argument('--camera_orig', type=str, default="[0,0,-10]",
                         help='camera origin position')
-
-    parser.add_argument('--show_text', action='store_true', 
-                        help='whether we show the text') 
-
-    parser.add_argument('--save_hand_csv', action='store_true',
-                        help='render all meshes as wireframes.')
 
     args = parser.parse_args()
 
