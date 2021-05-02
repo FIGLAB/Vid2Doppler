@@ -1,0 +1,14 @@
+*.mov
+*.avi
+*.mp4
+sample_video/
+models/
+mesh/
+data/
+Python/lib/
+Python/data/
+outputs/
+.DS_Store
+*.png
+*.jpg
+__pycache__/
