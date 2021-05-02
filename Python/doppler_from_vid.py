@@ -19,6 +19,10 @@ def main(args):
 	if args.visualize_mesh:
 		os.system("python compute_visualization.py --input_video %s --output_folder %s --wireframe" % (args.input_video, out_path))
 	os.system("python compute_synth_doppler.py --input_video %s --output_folder %s" % (args.input_video, out_path))
+	if args.doppler_gt:
+		os.system("python  plot_synth_dop.py --input_video %s --model_path %s --doppler_gt" % (args.input_video, args.model_path))
+	else:
+		os.system("python  plot_synth_dop.py --input_video %s --model_path %s" % (args.input_video, args.model_path))
 
 	# free all temporary memory
 	image_folder = str(np.load(folder_path + "/image_folder.npy"))
@@ -31,6 +35,10 @@ if __name__ == '__main__':
 	parser.add_argument('--input_video', type=str, help='Input video file')
 
 	parser.add_argument('--visualize_mesh', help='Render visibility mesh and velocity map', action='store_true')
+
+	parser.add_argument('--model_path', type=str, help='Path to DL models')
+
+	parser.add_argument('--doppler_gt', help='Doppler Ground Truth is available for reference', action='store_true')
 
 	args = parser.parse_args()
 
