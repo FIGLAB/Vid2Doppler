@@ -7,6 +7,8 @@ This is the research repository for Vid2Doppler (CHI 2021) containing the code f
 
 More details for the project can be found here.
 
+![](https://github.com/FIGLAB/Vid2Doppler/blob/main/media/classification.gif?raw=true)
+
 ## Environment Setup
 
 We first recommend setting up `conda` or `virtualenv` to run an independent setup.
@@ -57,6 +59,8 @@ Run the following in the `Python` folder.
 
 ## Synthetic Doppler Data Generation from Videos 
 
+![](https://github.com/FIGLAB/Vid2Doppler/blob/main/media/radial_velocity.gif?raw=true)
+
 `doppler_from_vid.py` generates synthetic Doppler data from videos. Run it on the `sample_videos` provided. 
 
 ```
@@ -68,6 +72,8 @@ Other options:
 ```	
 
 The script outputs the synthetic data signal (saved with the suffix `_output_signal`) in the same folder as the `input_video`. Reference plot showcased below.
+
+![](https://github.com/FIGLAB/Vid2Doppler/blob/main/media/signal.gif?raw=true)
 
 ## Human Activity Classification on Real World Doppler 
 
