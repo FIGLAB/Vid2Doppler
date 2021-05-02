@@ -54,6 +54,7 @@ def main(args):
 	for idx in range(0, len(dop_spec_test)):
 		ret, frame = cap.read()
 		original_synth = color_scale(synth_spec_test[idx],matplotlib.colors.Normalize(vmin=0, vmax=np.max(synth_spec_test)),"Initial Synthetic Doppler")
+		dop_spec_test[idx] = cv2.flip(dop_spec_test[idx], 0) # Range is flipped for ground truth doppler
 		original_dop = color_scale(dop_spec_test[idx],matplotlib.colors.Normalize(vmin=0, vmax=np.max(dop_spec_test)),"Real World Doppler")
 		recon = color_scale(decoded[idx],matplotlib.colors.Normalize(vmin=0, vmax=np.max(decoded)),"Final Synthetic Doppler")
 		in_frame = color_scale(frame,None,"Input Video")
