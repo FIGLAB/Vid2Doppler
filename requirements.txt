@@ -22,7 +22,7 @@ torchvision==0.5.0
 scikit-image==0.16.2
 scikit-video==1.1.11
 opencv-python==4.1.2.30
-imutils
+imutils==0.5.4
 git+https://github.com/giacaglia/pytube.git
 git+https://github.com/mattloper/chumpy.git
 git+https://github.com/mkocabas/yolov3-pytorch.git
