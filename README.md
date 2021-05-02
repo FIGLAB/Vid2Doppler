@@ -89,6 +89,8 @@ Karan Ahuja , Yue Jiang, Mayank Goel, and Chris Harrison. 2021. Vid2Doppler: Syn
 Videos for Training Privacy-Preserving Activity Recognition. In Proceedings ofthe 2021 CHI Conference on Human Factors
 in Computing Systems (CHI ’21). Association for Computing Machinery, New York, NY, USA.
 
+Vid2Doppler makes use of [VIBE](https://github.com/mkocabas/VIBE) and [Psbody](https://github.com/MPI-IS/mesh). Please cite them and be respectful of their licenses as well.
+
 
  
  
