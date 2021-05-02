@@ -5,7 +5,7 @@ This is the research repository for Vid2Doppler (CHI 2021) containing the code f
 * Generating synthetic Doppler data from videos
 * Evaluating the activity recognition classifier trained on synthetically generated Doppler data only, on the real world Doppler dataset presented in the paper
 
-More details for the project can be found here.
+More details for the project can be found [here](https://karan-ahuja.com/vid2dop.html).
 
 ![](https://github.com/FIGLAB/Vid2Doppler/blob/main/media/classification.gif?raw=true)
 
@@ -88,6 +88,8 @@ python doppler_eval.py --data_path PATH_TO_DATASET_FOLDER --model_path PATH_TO_D
 Karan Ahuja , Yue Jiang, Mayank Goel, and Chris Harrison. 2021. Vid2Doppler: Synthesizing Doppler Radar Data from
 Videos for Training Privacy-Preserving Activity Recognition. In Proceedings ofthe 2021 CHI Conference on Human Factors
 in Computing Systems (CHI ’21). Association for Computing Machinery, New York, NY, USA.
+
+[Download paper here.](https://karan-ahuja.com/assets/docs/paper/vid2dop.pdf)
 
 Vid2Doppler makes use of [VIBE](https://github.com/mkocabas/VIBE) and [Psbody](https://github.com/MPI-IS/mesh). Please cite them and be respectful of their licenses as well.
 
