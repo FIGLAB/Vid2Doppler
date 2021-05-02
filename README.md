@@ -49,7 +49,7 @@ Use the links below to download the:
 
 * [Real world Doppler dataset](https://www.dropbox.com/s/adh22md432ixq7v/data.zip?dl=0) collected across 10 participants and 12 activities. Details found in paper here. 
 * [Deep learning models](https://www.dropbox.com/s/a10ec6lau3loeec/models.zip?dl=0) for our classifier trained solely on synthetically generated Doppler data and encoder-decoder NN.
-* [Sample Videos](https://www.dropbox.com/s/vqr0so7jkde7x4d/sample_video.zip?dl=0) for demo purposes.
+* [Sample Videos](https://www.dropbox.com/s/xb2l3zennu3s5g5/sample_video.zip?dl=0) for demo purposes.
 
 You can download and unzip the above in the `Vid2Doppler` folder.
 
