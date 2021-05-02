@@ -5,11 +5,10 @@ sample_video/
 models/
 mesh/
 data/
-Python/lib/
-Python/data/
+lib/
+data/
 outputs/
 .DS_Store
 *.png
 *.jpg
 __pycache__/
- *.pyc
