@@ -23,7 +23,7 @@ conda activate vid2dop
 pip install -r requirements.txt
 ```
 
-2. Install the [pybody library](https://github.com/MPI-IS/mesh) for the `mesh` visualization. In particular:
+2. Install the [psbody library](https://github.com/MPI-IS/mesh) for the `mesh` visualization. In particular:
 
 ```
 git clone https://github.com/MPI-IS/mesh.git
