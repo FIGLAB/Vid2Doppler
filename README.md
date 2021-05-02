@@ -1,32 +1,45 @@
-# Vid2Doppler: Synthesizing Doppler Radar Data from Videos forTraining Privacy-Preserving Activity Recognition
+# Vid2Doppler: Synthesizing Doppler Radar Data from Videos for Training Privacy-Preserving Activity Recognition
 
-The full models and data will be available upon paper publication.
+This is the research repository for Vid2Doppler (CHI 2021) containing the code for:
+
+* Generating synthetic Doppler data from videos
+* Evaluating the activity recogntion classifier trained on synthetically generated Doppler data only, on the real world Doppler dataset presented in the paper.
+
+More details for the project can be found here.
 
 ## Environment Setup: 
 
-In "SynthDop" Folder,
+We first recommend setting up `conda` or `virtualenv` to run an independent setup.
 
-1. Create virtual environment:
+After cloning the git repository, in the Vid2Doppler folder:
 
-	source Environment/install_conda.sh OR source Environment/install_pip.sh
+1. Create a conda environment: 
 
-2. Follow https://github.com/MPI-IS/mesh to install pybody library. 
-	
-	git clone https://github.com/MPI-IS/mesh.git
+```
+conda create -n vid2dop python=3.7
+conda activate vid2dop
+pip install -r requirements.txt
+```
 
-	In the "mesh" folder, run BOOST_INCLUDE_DIRS=/path/to/boost/include make all
+2. Install the [pybody library](https://github.com/MPI-IS/mesh) for the mesh visualization. In particular:
 
-3. If used Environment/install_conda.sh to create the virtual environment, in use "echo $CONDA_PREFIX" to locate the env path. Then in $CONDA_PREFIX/lib/python3.7/site-packages/psbody/mesh/meshviewer.py, change the line "from OpenGL import GL, GLU, GLUT" to "from OpenGL import GL, GLU".
+```
+git clone https://github.com/MPI-IS/mesh.git
+```
+In the mesh folder, run:
+```
+BOOST_INCLUDE_DIRS=/path/to/boost/include make all
+```
+Now go to the `Python` folder in `Vid2Doppler` and replace the `meshviewer.py` installed by pybody with the custom one:
+```
+cp meshviewer.py $CONDA_PREFIX/lib/python3.7/site-packages/psbody/mesh/meshviewer.py
+```
+In case of using some other virtual environment manager, replace the `meshviewer.py` file installed by psbody with the one provided.
 
-	OR
-
-	If used Environment/install_pip.sh to create the virtual environment, in ./dope/lib/python3.7/site-packages/psbody/mesh/meshviewer.py, change the line "from OpenGL import GL, GLU, GLUT" to "from OpenGL import GL, GLU".
-
-4. Run the following commands to get the pretrained pose model:
-	
-	cd Python
-	source ../Environment/prepare_data.sh
-
+3. Run the following command in the `Python` folder to get the pretrained VIBE pose model in the:
+```
+source ../Environment/prepare_data.sh
+```
 
 ## Usages:
 
