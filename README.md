@@ -3,7 +3,7 @@
 This is the research repository for Vid2Doppler (CHI 2021) containing the code for:
 
 * Generating synthetic Doppler data from videos
-* Evaluating the activity recogntion classifier trained on synthetically generated Doppler data only, on the real world Doppler dataset presented in the paper.
+* Evaluating the activity recognition classifier trained on synthetically generated Doppler data only, on the real world Doppler dataset presented in the paper.
 
 More details for the project can be found here.
 
@@ -52,6 +52,8 @@ Use the links below to download the:
 You can download and unzip the above in the `Vid2Doppler` folder.
 
 ## Usage
+
+Run the following in the `Python` folder.
 
 ## Synthetic Doppler Data Generation from Videos 
 
