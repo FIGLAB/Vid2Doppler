@@ -178,7 +178,7 @@ if __name__ == '__main__':
     parser.add_argument('--background', action='store_true',
                         help='output result with original background.')
 
-    parser.add_argument('--camera_orig', type=str, default="[0,0,-10]",
+    parser.add_argument('--camera_orig', type=str, default="[0,0,10]",
                         help='camera origin position')
 
     args = parser.parse_args()

@@ -1,4 +1,4 @@
-import numpy as np 
+import numpy as np
 import os
 from os import listdir
 from os.path import isfile, join
@@ -19,13 +19,13 @@ def main(args):
     # get video infomation
     video_file = os.path.basename(args.input_video).replace('.mp4', '')
     out_path = args.output_folder + '/' + video_file + '/'
-    video = cv2.VideoCapture("./" + args.input_video)    
+    video = cv2.VideoCapture("./" + args.input_video)
     fps = video.get(cv2.CAP_PROP_FPS)
 
     # get frame infomation
     num_frames = len([name for name in \
             os.listdir(out_path + "/frame_velocity") \
-            if "frame_" in name]) 
+            if "frame_" in name])
     output_path = os.path.join(args.output_folder, os.path.basename(\
                                 video_file).replace('.mp4', ''))
     if os.path.isfile(output_path + \
@@ -52,7 +52,6 @@ def main(args):
     if GAUSSIAN_BLUR:
         for i in range(len(synth_doppler_dat)):
             synth_doppler_dat[i] = gaussian_filter1d(synth_doppler_dat[i], GAUSSIAN_KERNEL)
-
 
     np.save(out_path+"/synth_doppler.npy",synth_doppler_dat)
 

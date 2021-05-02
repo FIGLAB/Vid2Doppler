@@ -114,7 +114,7 @@ if __name__ == '__main__':
     parser.add_argument('--output_folder', type=str,
                         help='output folder to write results')
 
-    parser.add_argument('--camera_orig', type=str, default="[0,0,-10]",
+    parser.add_argument('--camera_orig', type=str, default="[0,0,10]",
                         help='camera origin position')
 
 
