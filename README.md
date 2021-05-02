@@ -51,16 +51,38 @@ Use the links below to download the:
 
 You can download and unzip the above in the `Vid2Doppler` folder.
 
-
 ## Usage
 
-	python doppler_from_vid.py --input_video YOUR_INPUT_VIDEO_FILE
+## Synthetic Doppler Data Generation from Videos 
 
-	Other options:
-		--visualize_mesh : output visualized mesh
-		--wireframe : output wireframe video results (otherwise, output mesh video results)
+`doppler_from_vid.py` generates synthetic Doppler data from videos. Run it on the `sample_videos` provided. 
+
+```
+python doppler_from_vid.py --input_video YOUR_INPUT_VIDEO_FILE --model_path PATH_TO_DL_MODELS_FOLDER  
+
+Other options:
+	--visualize_mesh : output visualized radial velocity mesh (saved automatically in the output folder)
+	--doppler_gt : Use if the ground truth real world Doppler data is available for comparison
+```	
+
+The script outputs the synthetic data signal (saved with the suffix `_output_signal`) in the same folder as the `input_video`. Reference plot showcased below.
+
+## Human Activity Classification on Real World Doppler 
+
+`doppler_eval.py` has the code for evaluating the activity recogntion classifier trained on synthetically generated Doppler data and tested on the real world Doppler dataset.
+
+```
+python doppler_eval.py --data_path PATH_TO_DATASET_FOLDER --model_path PATH_TO_DL_MODELS_FOLDER  
+```
+
+## Reference
+
+Karan Ahuja , Yue Jiang, Mayank Goel, and Chris Harrison. 2021. Vid2Doppler: Synthesizing Doppler Radar Data from
+Videos for Training Privacy-Preserving Activity Recognition. In Proceedings ofthe 2021 CHI Conference on Human Factors
+in Computing Systems (CHI ’21). Association for Computing Machinery, New York, NY, USA.
 
 
+ 
  
 
 
