@@ -56,7 +56,7 @@ def main(args):
 		original_synth = color_scale(synth_spec_test[idx],matplotlib.colors.Normalize(vmin=0, vmax=np.max(synth_spec_test)),"Initial Synthetic Doppler")
 		original_dop = color_scale(dop_spec_test[idx],matplotlib.colors.Normalize(vmin=0, vmax=np.max(dop_spec_test)),"Real World Doppler")
 		recon = color_scale(decoded[idx],matplotlib.colors.Normalize(vmin=0, vmax=np.max(decoded)),"Final Synthetic Doppler")
-		in_frame = color_scale(frame,None,"Prediction: "+label)
+		in_frame = color_scale(frame,None,"Input Video")
 		output = np.hstack([in_frame,original_dop, original_synth, recon])
 		out_vid.write(output)
 

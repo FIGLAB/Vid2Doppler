@@ -5,7 +5,6 @@ sample_video/
 models/
 mesh/
 data/
-Python/lib/
 Python/data/
 outputs/
 .DS_Store
