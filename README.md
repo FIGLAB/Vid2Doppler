@@ -85,11 +85,28 @@ python doppler_eval.py --data_path PATH_TO_DATASET_FOLDER --model_path PATH_TO_D
 
 ## Reference
 
-Karan Ahuja , Yue Jiang, Mayank Goel, and Chris Harrison. 2021. Vid2Doppler: Synthesizing Doppler Radar Data from
-Videos for Training Privacy-Preserving Activity Recognition. In Proceedings ofthe 2021 CHI Conference on Human Factors
-in Computing Systems (CHI ’21). Association for Computing Machinery, New York, NY, USA.
+Karan Ahuja, Yue Jiang, Mayank Goel, and Chris Harrison. 2021. Vid2Doppler: Synthesizing Doppler Radar Data from Videos for Training Privacy-Preserving Activity Recognition. In <i>Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</i> (<i>CHI '21</i>). Association for Computing Machinery, New York, NY, USA, Article 292, 1–10. DOI:https://doi.org/10.1145/3411764.3445138
 
 [Download paper here.](https://karan-ahuja.com/assets/docs/paper/vid2dop.pdf)
+
+BibTex Reference:
+```
+@inproceedings{10.1145/3411764.3445138,
+author = {Ahuja, Karan and Jiang, Yue and Goel, Mayank and Harrison, Chris},
+title = {Vid2Doppler: Synthesizing Doppler Radar Data from Videos for Training Privacy-Preserving Activity Recognition},
+year = {2021},
+isbn = {9781450380966},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3411764.3445138},
+doi = {10.1145/3411764.3445138},
+articleno = {292},
+numpages = {10},
+keywords = {HAR, Datasets, Cross domain translation, Privacy-preserving sensing, Doppler sensing, Human activity recognition},
+location = {Yokohama, Japan},
+series = {CHI '21}
+}
+```
 
 Vid2Doppler makes use of [VIBE](https://github.com/mkocabas/VIBE) and [Psbody](https://github.com/MPI-IS/mesh). Please cite them and be respectful of their licenses as well.
 
