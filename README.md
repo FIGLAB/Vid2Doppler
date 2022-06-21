@@ -110,6 +110,9 @@ series = {CHI '21}
 
 Vid2Doppler makes use of [VIBE](https://github.com/mkocabas/VIBE) and [Psbody](https://github.com/MPI-IS/mesh). Please cite them and be respectful of their licenses as well.
 
+## License
+
+GPL v 2.0 License file present in repo. Please contact innovation@cmu.edu if you would like another license for your use.
 
  
  
